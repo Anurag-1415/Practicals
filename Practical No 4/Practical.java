@@ -53,39 +53,49 @@ if (system.equalsIgnoreCase("D")) {
 if(value.startsWith("0B")) {
 int length=value.length();
 int DecimalNumber=0;
-for (int i=0;i<length;i++){
-if(value.charAt(i)=='1'){
-DecimalNumber+=Math.pow(2,length-i-1);
+for (int i=2;i<length;i++){
+if('0'<=value.charAt(i) && value.charAt(i)<='1'){
+DecimalNumber+=Character.getNumericValue(value.charAt(i))*Math.pow(2,length-i-1);
+}else{
+System.out.println("Invalid binary number! Please enter a valid binary number!");
+return;
 }
-
 }
-System.out.println("The decimal number of your given binary number is:"+DecimalNumber);
+System.out.println("Binary-->Decimal: "+DecimalNumber);
 //x no
 }else if(value.startsWith("0X")){
 int length=value.length();
-System.out.println(value);
 int DecimalNumber=0;
-for (int i=0;i<length;i++){
-if(('0'<=value.charAt(i) && value.charAt(i)<='9') || ('a'<=value.charAt(i) && value.charAt(i)<'g') || ('A'<=value.charAt(i) && value.charAt(i)<'G')){
-int digit = Character.getNumericValue(value.charAt(i));
-
-DecimalNumber+=digit*Math.pow(16,length-i-1);
+for (int i=2;i<length;i++){
+if (('0' <= value.charAt(i) && value.charAt(i) <= '9') || ('a' <= value.charAt(i) && value.charAt(i) <= 'f') || ('A' <= value.charAt(i) && value.charAt(i) <= 'F')){
+DecimalNumber+=Character.getNumericValue(value.charAt(i))*Math.pow(16,length-i-1);
+} else{ 
+System.out.println("Invalid hexa number! Please enter a valid Hexa number!");
+return;
 }
 }
-System.out.println("The decimal number of your given hexa number is: "+DecimalNumber);
+System.out.println("Hexa-->Decimal: "+DecimalNumber);
 //o no
 }else if (value.startsWith("0")) {
 int length=value.length();
-
 int DecimalNumber=0;
-for (int i=0;i<length;i++){
-DecimalNumber+=(value.charAt(i)-'0')*Math.pow(8,length-i-1);
-
+for (int i=1;i<length;i++){
+if('0'<= value.charAt(i) && value.charAt(i)<='7'){
+DecimalNumber+=Character.getNumericValue(value.charAt(i))*Math.pow(8,length-i-1);
+}else{ 
+System.out.println("Invalid octal number! Please enter a valid octal number!");
+return;
 }
-System.out.println("The decimal number of your given octal number is: "+DecimalNumber);
+}
+System.out.println("Octal-->Decimal: "+DecimalNumber);
 //d no
 }else {
-System.out.println("The decimal number of your given decimal number is: "+value);
+if(value.matches("^[0-9]+$")){
+System.out.println("Decimal: "+value);
+}else{
+System.out.println("Invalid decimal number! Please enter a valid decimal number!");
+return;
+}
 }
 }
 
@@ -95,47 +105,66 @@ else if(system.equalsIgnoreCase("B")) {
 StringBuilder binary=new StringBuilder();
 //b no
 if(value.startsWith("0B")) {
-System.out.println("The binary number of your given binary number is: "+"0B"+value);
+String b="";
+for (int i=2;i<value.length();i++){
+if('0'<=value.charAt(i) && value.charAt(i)<='1'){
+b+=value.charAt(i);
+}else{ 
+System.out.println("Invalid binary number! Please enter a valid binary number!");
+return;
+}
+}
+System.out.println("Binary: "+"0B"+b);
+
 //x no
 }else if(value.startsWith("0X")){
-
 int length=value.length();
-
 int DecimalNumber=0;
-for (int i=0;i<length;i++){
-if(('0'<=value.charAt(i) && value.charAt(i)<='9') || ('a'<=value.charAt(i) && value.charAt(i)<'g') || ('A'<=value.charAt(i) && value.charAt(i)<'G')){
-int digit = Character.getNumericValue(value.charAt(i));
-DecimalNumber+=digit*Math.pow(16,length-i-1);
+for (int i=2;i<length;i++){
+if (('0' <= value.charAt(i) && value.charAt(i) <= '9') || ('a' <= value.charAt(i) && value.charAt(i) <= 'f') || ('A' <= value.charAt(i) && value.charAt(i) <= 'F')){
+DecimalNumber+=Character.getNumericValue(value.charAt(i))*Math.pow(16,length-i-1);
+} else{ 
+System.out.println("Invalid hexa number! Please enter a valid Hexa number!");
+return;
 }
 }
 while(DecimalNumber>0){
-int remainder=DecimalNumber%2;
-binary.append(remainder);
+binary.append(DecimalNumber%2);
 DecimalNumber/=2;
 }
-System.out.println("The binary number of your given hexa number is: "+"0B"+binary.reverse());
+System.out.println("Hexa-->Binary: "+"0B"+binary.reverse());
 //o no
 }else if (value.startsWith("0")) {
 int length=value.length();
-
 int DecimalNumber=0;
 for (int i=0;i<length;i++){
-DecimalNumber+=(value.charAt(i)-'0')*Math.pow(8,length-i-1);
+if('0'<= value.charAt(i) && value.charAt(i)<='7'){
+DecimalNumber+=Character.getNumericValue(value.charAt(i))*Math.pow(8,length-i-1);
+}else{ 
+System.out.println("Invalid octal number! Please enter a valid octal number!");
+return;
+}
 }
 while(DecimalNumber>0){
-int remainder=DecimalNumber%2;
-binary.append(remainder);
+binary.append(DecimalNumber%2);
 DecimalNumber/=2;
 }
-System.out.println("The binary number of your given octal number is: "+"0B"+binary.reverse());
+System.out.println("Octal-->Binary: "+"0B"+binary.reverse());
+//d no
 }else {
-int n=Integer.parseInt(value);
+int n;
+if(value.matches("^[0-9]+$")){
+n=Integer.parseInt(value);
+}else{
+System.out.println("Invalid decimal number! Please enter a valid decimal number!");
+return;
+}
 while(n>0){
 int remainder=n%2;
 binary.append(remainder);
 n/=2;
 }
-System.out.println("The binary number of your given decimal number is: "+"0B"+binary.reverse());
+System.out.println("Decimal-->Binary: "+"0B"+binary.reverse());
 }
 }
 
@@ -146,96 +175,128 @@ StringBuilder binary=new StringBuilder();
 if(value.startsWith("0B")) {
 int length=value.length();
 int DecimalNumber=0;
-for (int i=0;i<length;i++){
-if(value.charAt(i)=='1'){
-DecimalNumber+=Math.pow(2,length-i-1);
+for (int i=2;i<length;i++){
+if('0'<=value.charAt(i) && value.charAt(i)<='1'){
+DecimalNumber+=Character.getNumericValue(value.charAt(i))*Math.pow(2,length-i-1);
+}else{
+System.out.println("Invalid binary number! Please enter a valid binary number!");
+return;
 }
 }
 while(DecimalNumber>0){
-int remainder=DecimalNumber%8;
-binary.append(remainder);
+binary.append(DecimalNumber%8);
 DecimalNumber/=8;
 }
-
-System.out.println("The octal number of your given binary number is: "+"0"+binary.reverse());
+System.out.println("Binary-->Octal: "+"0"+binary.reverse());
 //x no
 }else if (value.startsWith("0X")) {
 int length=value.length();
 int DecimalNumber=0;
-for (int i=0;i<length;i++){
-if(('0'<=value.charAt(i) && value.charAt(i)<='9') || ('a'<=value.charAt(i) && value.charAt(i)<'g') || ('A'<=value.charAt(i) && value.charAt(i)<'G')){
-int digit = Character.getNumericValue(value.charAt(i));
-DecimalNumber+=digit*Math.pow(16,length-i-1);
+for (int i=2;i<length;i++){
+if (('0' <= value.charAt(i) && value.charAt(i) <= '9') || ('a' <= value.charAt(i) && value.charAt(i) <= 'f') || ('A' <= value.charAt(i) && value.charAt(i) <= 'F')){
+DecimalNumber+=Character.getNumericValue(value.charAt(i))*Math.pow(16,length-i-1);
+} else{ 
+System.out.println("Invalid hexa number! Please enter a valid Hexa number!");
+return;
 }
 }
 while(DecimalNumber>0){
-int remainder=DecimalNumber%8;
-binary.append(remainder);
+binary.append(DecimalNumber%8);
 DecimalNumber/=8;
 }
-
-System.out.println("The octal number of your given hexa number is: "+"0"+binary.reverse());
+System.out.println("Hexa-->Octal: "+"0"+binary.reverse());
 }else if (value.startsWith("0")) {
-System.out.println("The octal number of your given octal number is: "+value);
-
+String octal="";
+for (int i=1;i<value.length();i++){
+if('0'<= value.charAt(i) && value.charAt(i)<='7'){
+octal+=value.charAt(i);
+}else{ 
+System.out.println("Invalid octal number! Please enter a valid octal number!");
+return;
+}
+}
+System.out.println("Octal: "+"0"+octal);
 }else{
-int n=Integer.parseInt(value);
+int n;
+if(value.matches("^[0-9]+$")){
+n=Integer.parseInt(value);
+}else{
+System.out.println("Invalid decimal number! Please enter a valid decimal number!");
+return;
+}
 while(n>0){
 int remainder=n%8;
 binary.append(remainder);
 n/=8;
 }
-System.out.println("The octal number of your given decimal number is: "+"0"+binary.reverse());
+System.out.println("Decimal-->Octal: "+"0"+binary.reverse());
 }
 }
 
 
 //Hexa
-
 else {
 StringBuilder binary=new StringBuilder();
 //b no
 if(value.startsWith("0B")) {
 int length=value.length();
 int DecimalNumber=0;
-for (int i=0;i<length;i++){
-if(value.charAt(i)=='1'){
-DecimalNumber+=Math.pow(2,length-i-1);
+for (int i=2;i<length;i++){
+if('0'<=value.charAt(i) && value.charAt(i)<='1'){
+DecimalNumber+=Character.getNumericValue(value.charAt(i))*Math.pow(2,length-i-1);
+}else{
+System.out.println("Invalid binary number! Please enter a valid binary number!");
+return;
 }
 }
 while(DecimalNumber>0){
-int remainder=DecimalNumber%16;
-binary.append(Character.toUpperCase(Character.forDigit(remainder,16)));
+binary.append(Character.toUpperCase(Character.forDigit(DecimalNumber%16,16)));
 DecimalNumber/=16;
 }
-
-System.out.println("The hexa number of your given binary number is: "+"0X"+binary.reverse());
+System.out.println("Binary-->Hexa: "+"0X"+binary.reverse());
 //x no
 }else if(value.startsWith("0X")) {
-System.out.println("The hexa number of your given hexa number is: "+value.toUpperCase());
+String hexa="";
+for(int i=2;i<value.length();i++){
+if (('0' <= value.charAt(i) && value.charAt(i) <= '9') || ('a' <= value.charAt(i) && value.charAt(i) <= 'f') || ('A' <= value.charAt(i) && value.charAt(i) <= 'F')){
+hexa+=value.charAt(i);
+} else{ 
+System.out.println("Invalid hexa number! Please enter a valid Hexa number!");
+return;
+}
+}
+System.out.println("Hexa: "+"0X"+hexa.toUpperCase());
 //o no
 }else if (value.startsWith("0")) {
 int length=value.length();
-
 int DecimalNumber=0;
 for (int i=0;i<length;i++){
-DecimalNumber+=(value.charAt(i)-'0')*Math.pow(8,length-i-1);
+if('0'<= value.charAt(i) && value.charAt(i)<='7'){
+DecimalNumber+=Character.getNumericValue(value.charAt(i))*Math.pow(8,length-i-1);
+}else{ 
+System.out.println("Invalid octal number! Please enter a valid octal number!");
+return;
+}
 }
 while(DecimalNumber>0){
-int remainder=DecimalNumber%16;
-binary.append(Character.toUpperCase(Character.forDigit(remainder,16)));
+binary.append(Character.toUpperCase(Character.forDigit(DecimalNumber%16,16)));
 DecimalNumber/=16;
 }
-System.out.println("The hexa number of your given octal number is: "+"0X"+binary.reverse());
+System.out.println("Octal-->Hexa: "+"0X"+binary.reverse());
 
 }else {
-int n=Integer.parseInt(value);
+int n;
+if(value.matches("^[0-9]+$")){
+n=Integer.parseInt(value);
+}else{
+System.out.println("Invalid decimal number! Please enter a valid decimal number!");
+return;
+}
 while(n>0){
-int remainder=n%16;
-binary.append(Character.toUpperCase(Character.forDigit(remainder,16)));
+binary.append(Character.toUpperCase(Character.forDigit(n%16,16)));
 n/=16;
 }
-System.out.println("The hexa number of your given decimal number is: "+"0X"+binary.reverse());
+System.out.println("Decimal-->Hexa: "+"0X"+binary.reverse());
 }
 }
 }
