@@ -16,7 +16,10 @@ class Practical5{
       
       //using While Loop
       int factorial2(int number){
-            if(number<0) System.out.println("Can't find the factorial of negative number!");
+            if(number<0) {
+            System.out.println("Can't find the factorial of negative number!"); 
+            return 0;
+            }
             if(number<2) return 1;
             int factorial=2;
             while(number>2){
@@ -28,7 +31,10 @@ class Practical5{
       
       //Using Recursion
       int factorial3(int number){
-            if(number<0) System.out.println("Can't find the factorial of negative number!");
+            if(number<0) {
+            System.out.println("Can't find the factorial of negative number!"); 
+            return 0;
+            }
             if(number<2) return 1;
             int factorial=2;
             factorial=number*factorial3(number-1);
