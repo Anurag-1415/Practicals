@@ -1,3 +1,4 @@
+import java.util.*;
 class Practical5{
 
       //Using For Loop
@@ -41,13 +42,14 @@ class Practical5{
             return factorial;
       }
       
-      //Sum of all Array Elements using Recursion            
-      int getSum(int[] array,int index){
+      //Sum of all Array Elements using Recursion   
+            int index=0;
+      int getSum(int[] array){
             if(index==array.length) return 0;
             int sum=0;
-            sum+=array[index]+getSum(array,index+1);
+            sum+=array[index++]+getSum(array);
             return sum;
-      }
+            }
       
       //Main Method
       public static void main(String[] args){
@@ -71,7 +73,7 @@ class Practical5{
             //Call for Sum of Array Elements using Recursion
             Practical5 arraySum=new Practical5();
             int[] array={1,2,3,4,5,6,7,8,9,10};
-            int sum=arraySum.getSum(array,3);
+            int sum=arraySum.getSum(array);
             System.out.println("The sum of your given array elements are: "+sum);
       
       
