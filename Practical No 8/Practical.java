@@ -38,14 +38,14 @@ class Practical8{
       void pattern4(int line,int size){
                   if(line<size+1){
                         System.out.print("  ".repeat(size-line));
-                  if(line%2==0){
-                        System.out.println("/ ".repeat(2*line-1));
-                  }else System.out.println("* ".repeat(2*line-1));
-                              pattern4(line+1,size);
-                        System.out.print("  ".repeat(size-line));
-                  if(line%2!=0){
-                        System.out.println("/ ".repeat(2*line-1));
-                  }else System.out.println("* ".repeat(2*line-1));
+                        if(line%2==0){
+                              System.out.println("/ ".repeat(2*line-1));
+                        }else System.out.println("* ".repeat(2*line-1));
+                                    pattern4(line+1,size);
+                              System.out.print("  ".repeat(size-line));
+                        if(line%2!=0){
+                              System.out.println("/ ".repeat(2*line-1));
+                        }else System.out.println("* ".repeat(2*line-1));
                   
                   }      
      }
