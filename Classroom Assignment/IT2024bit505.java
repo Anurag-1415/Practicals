@@ -1,4 +1,4 @@
-public class 2024bit505 {
+public class IT2024bit505 {
       public static String reverse(String inputString){
             if(inputString.length()>0){
             return inputString.charAt(inputString.length()-1) + 
